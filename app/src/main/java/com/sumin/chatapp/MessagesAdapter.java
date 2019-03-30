@@ -1,5 +1,7 @@
 package com.sumin.chatapp;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +17,15 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessagesViewHolder> {
 
-    private List<Message> messages;
+    private static final int TYPE_MY_MESSAGE = 0;
+    private static final int TYPE_OTHER_MESSAGE = 1;
 
-    public MessagesAdapter() {
+    private List<Message> messages;
+    private Context context;
+
+    public MessagesAdapter(Context context) {
         messages = new ArrayList<>();
+        this.context = context;
     }
 
     public List<Message> getMessages() {
@@ -33,8 +40,24 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @NonNull
     @Override
     public MessagesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_item_message, viewGroup, false);
+        View view;
+        if (i == TYPE_MY_MESSAGE) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_item_my_message, viewGroup, false);
+        } else {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_item_other_message, viewGroup, false);
+        }
         return new MessagesViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        Message message = messages.get(position);
+        String author = message.getAuthor();
+        if (author != null && author.equals(PreferenceManager.getDefaultSharedPreferences(context).getString("author", "Anonim"))) {
+            return TYPE_MY_MESSAGE;
+        } else {
+            return TYPE_OTHER_MESSAGE;
+        }
     }
 
     @Override
@@ -50,7 +73,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         }
         messagesViewHolder.textViewAuthor.setText(author);
         if (textOfMessage != null && !textOfMessage.isEmpty()) {
+            messagesViewHolder.textViewTextOfMessage.setVisibility(View.VISIBLE);
             messagesViewHolder.textViewTextOfMessage.setText(textOfMessage);
+        } else {
+            messagesViewHolder.textViewTextOfMessage.setVisibility(View.GONE);
         }
         if (urlToMessage != null && !urlToMessage.isEmpty()) {
             Picasso.get().load(urlToMessage).into(messagesViewHolder.imageViewImage);
