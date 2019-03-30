@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "952020788948",
+    "firebase_url": "https://chat-app-53a82.firebaseio.com",
+    "project_id": "chat-app-53a82",
+    "storage_bucket": "chat-app-53a82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952020788948:android:838fa00c10a9eac7",
+        "android_client_info": {
+          "package_name": "com.sumin.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952020788948-pitr7kvui3t34muup8pp4g2kt07gsrhp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sumin.chatapp",
+            "certificate_hash": "63e6f1fffdd14fdf4ee299e2a0e2dfc1b343241f"
+          }
+        },
+        {
+          "client_id": "952020788948-sn7keo1guevpq3gke9bgk9nppcafsbgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqEdRp8LiXBVi9Cr_nq8FdditY2l1ZWSM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952020788948-sn7keo1guevpq3gke9bgk9nppcafsbgm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
